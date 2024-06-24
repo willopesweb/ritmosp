@@ -1,0 +1,159 @@
+@import "../../assets/scss/abstracts";
+
+$desktop: 600;
+
+.l-header {
+  background-color: var(--theme-color-1);
+  color: var(--text-color-1);
+  height: rem(80);
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: z-index("fixed-header");
+
+  &__content {
+    @include content("grid");
+    padding-top: var(--global-module-size);
+    padding-bottom: var(--global-module-size);
+    grid-template-columns: 1fr 1fr;
+
+    @include breakpoint($desktop) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  &__logo {
+    max-width: rem(100);
+
+    @include breakpoint(600) {
+      max-width: none;
+    }
+  }
+
+  &__menu {
+    display: flex;
+    gap: rem(10);
+
+    @include breakpoint($desktop) {
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
+
+  @media only screen and (max-width: "#{$desktop - 1}px") {
+    &__menu {
+      height: 100%;
+      left: 0;
+      width: rem(200);
+      padding-top: var(--global-module-size);
+      padding-left: var(--global-module-size);
+      background-color: var(--theme-color-1);
+      transition: var(--theme-transition);
+      box-shadow: var(--theme-box-shadow);
+      position: fixed;
+      top: 0;
+      transform: translateX(-100%);
+      align-items: flex-start;
+      flex-direction: column;
+      z-index: z-index("mobile-menu");
+
+      &.is-active {
+        transform: translateX(0);
+      }
+    }
+
+    &__search {
+      position: fixed;
+      top: rem(60);
+      left: 0;
+      width: 100%;
+      background-color: var(--theme-color-2);
+      display: grid;
+      place-items: center;
+      padding: var(--global-module-size);
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--theme-transition);
+      z-index: z-index("search-bar");
+
+      &.is-active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(rem(20));
+      }
+    }
+  }
+
+  &__menu-item {
+    color: var(--text-color-1);
+    padding: rem(10);
+    display: flex;
+    align-items: center;
+    transition: var(--theme-transition);
+    width: 100%;
+
+    svg {
+      padding-right: rem(3);
+
+      path {
+        fill: var(--text-color-1);
+        transition: var(--theme-transition);
+      }
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      color: var(--theme-color-2);
+
+      svg path {
+        fill: var(--theme-color-2);
+      }
+    }
+
+    @include breakpoint($desktop) {
+      justify-content: center;
+      width: auto;
+    }
+
+  }
+
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    svg {
+      padding-right: rem(3);
+      cursor: pointer;
+
+      path {
+        fill: var(--text-color-1);
+        transition: var(--theme-transition);
+      }
+
+      &:hover,
+      &:focus,
+      &:active,
+      &.is-active {
+        path {
+          fill: var(--theme-color-2);
+        }
+      }
+    }
+
+    @include breakpoint($desktop) {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  &__search {
+    @include breakpoint($desktop) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      visibility: visible;
+    }
+  }
+}

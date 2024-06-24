@@ -1,0 +1,14 @@
+@import "abstracts";
+@import "base/theme-variables";
+@import "base/reset";
+@import "base/helpers";
+
+body {
+  background: linear-gradient(to right, #10101f, #11122b, #0c143c);
+  color: var(--text-color-1);
+}
+
+main {
+  @include content;
+  margin-top: rem(100);
+}

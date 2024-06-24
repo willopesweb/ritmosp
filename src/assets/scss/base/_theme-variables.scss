@@ -1,0 +1,60 @@
+:root {
+	--theme-color-1: #24247a;
+	--theme-color-2: #cd9834;
+	--theme-color-3: #90CEA1;
+	--theme-color-4: #f3a93b;
+
+	--text-color-1: #fff;
+
+	--background-content-color: rgba(0, 0, 0, .2);
+
+	--global-max-width: 1300px;
+	--global-module-size: 20px;
+	--global-font-size: 1.125rem;
+	--global-line-height: 1.5;
+	--global-radius: .9375rem;
+
+	--theme-font-family: "Roboto", sans-serif;
+	--theme-transition: 0.5s all ease;
+	--theme-box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+}
+
+body {
+	font-display: swap;
+	font-family: var(--theme-font-family);
+}
+
+/*SOCIAL COLORS*/
+$social-media-colors: (
+	"facebook": #3b5998,
+	"twitter": #00aced,
+	"linkedin": #0077b5,
+	"youtube": #cd201f,
+	"instagram": #e4405f,
+	"github": #333,
+	"telegram": #08c,
+	"whatsapp": #34af23,
+	"rss": #f26522,
+);
+
+@function social-media-color($social) {
+	@return map-get($social-media-colors, $social);
+}
+
+// ==========================================================================
+// Transitions
+// ==========================================================================
+
+$transition-duration: 305ms;
+$transition-duration-complex: 385ms;
+$transition-duration-entrance: 235ms;
+$transition-duration-exit: 205ms;
+$transition-duration-fast: 150ms;
+
+$transition-function-ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$transition-function-ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+$transition-function-ease-in-back: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+$transition-function-ease-out-back: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+$transition-function-ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+$transition-function-ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+$transition-function-elastic: cubic-bezier(0.175, 0.885, 0.41, 1.46);
