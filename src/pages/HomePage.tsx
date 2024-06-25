@@ -14,19 +14,21 @@ const Home = () => {
   }
 
   return (
-    <div>
-      {cars.length > 0 ? (
-        <ul>
-          {cars.map((car) => (
-            <li key={car.Id}>
-              <Link to={`/carro/${car.Id}`}>{car.Modelo}</Link>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <div>Nenhum carro encontrado.</div>
-      )}
-    </div>
+    <main >
+      <div className="l-home__content">
+        {cars.length > 0 ? (
+          <ul>
+            {cars.map((car) => (
+              <li key={car.Id}>
+                <Link to={`/carro/${car.Id}`}>{car.Modelo}</Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div>Nenhum carro encontrado.</div>
+        )}
+      </div>
+    </main>
   );
 }
 

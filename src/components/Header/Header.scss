@@ -3,23 +3,19 @@
 $desktop: 600;
 
 .l-header {
-  background-color: var(--theme-color-1);
+  background-color: #fff;
+  box-shadow: var(--theme-box-shadow2);
   color: var(--text-color-1);
-  height: rem(80);
   position: fixed;
-  top:0;
+  top: 0;
   width: 100%;
   z-index: z-index("fixed-header");
 
   &__content {
     @include content("grid");
-    padding-top: var(--global-module-size);
-    padding-bottom: var(--global-module-size);
-    grid-template-columns: 1fr 1fr;
-
-    @include breakpoint($desktop) {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
+    padding-top: rem(10);
+    padding-bottom: rem(10);
+    grid-template-columns: 200px calc(100% - 200px);
   }
 
   &__logo {
@@ -61,57 +57,25 @@ $desktop: 600;
         transform: translateX(0);
       }
     }
-
-    &__search {
-      position: fixed;
-      top: rem(60);
-      left: 0;
-      width: 100%;
-      background-color: var(--theme-color-2);
-      display: grid;
-      place-items: center;
-      padding: var(--global-module-size);
-      opacity: 0;
-      visibility: hidden;
-      transition: var(--theme-transition);
-      z-index: z-index("search-bar");
-
-      &.is-active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(rem(20));
-      }
-    }
   }
 
   &__menu-item {
     color: var(--text-color-1);
+    font-weight: bold;
     padding: rem(10);
     display: flex;
     align-items: center;
     transition: var(--theme-transition);
     width: 100%;
 
-    svg {
-      padding-right: rem(3);
-
-      path {
-        fill: var(--text-color-1);
-        transition: var(--theme-transition);
-      }
-    }
-
     &:hover,
     &:focus,
     &:active {
       color: var(--theme-color-2);
-
-      svg path {
-        fill: var(--theme-color-2);
-      }
     }
 
     @include breakpoint($desktop) {
+      color: var(--theme-color-1);
       justify-content: center;
       width: auto;
     }
@@ -128,7 +92,7 @@ $desktop: 600;
       cursor: pointer;
 
       path {
-        fill: var(--text-color-1);
+        fill: var(--theme-color-1);
         transition: var(--theme-transition);
       }
 
@@ -145,15 +109,6 @@ $desktop: 600;
     @include breakpoint($desktop) {
       display: none;
       visibility: hidden;
-    }
-  }
-
-  &__search {
-    @include breakpoint($desktop) {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      visibility: visible;
     }
   }
 }

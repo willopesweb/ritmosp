@@ -1,0 +1,65 @@
+@import "../../assets/scss/abstracts";
+
+.l-footer {
+  background-color: var(--theme-color-1);
+  color: vaR(--text-color-1);
+
+  &__content {
+    @include content("grid");
+    padding-top: calc(var(--global-module-size) * 3);
+    padding-bottom: calc(var(--global-module-size) * 3);
+    gap: calc(var(--global-module-size) * 2);
+
+    @include breakpoint(400) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @include breakpoint(800) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    /* @include breakpoint(800) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    } */
+  }
+
+  &__loja {
+    display: flex;
+    flex-direction: column;
+    gap: var(--global-module-size)
+  }
+
+  &__loja-title {
+    font-size: rem(21);
+  }
+
+  &__loja-info {
+    display: flex;
+    gap: rem(10);
+    align-items: center;
+    font-size: rem(18);
+    line-height: rem(28);
+  }
+
+  &__icon {
+    background-color: var(--theme-color-2);
+    min-height: rem(50);
+    min-width: rem(50);
+    padding: rem(10);
+    border-radius: 5px;
+
+    path {
+      fill: #fff;
+    }
+  }
+
+  &__subfooter {
+    background-color: var(--theme-color-3);
+  }
+
+  &__subfooter-content {
+    padding-top: calc(var(--global-module-size) * 2);
+    padding-bottom: calc(var(--global-module-size) * 2);
+    @include content;
+  }
+}

@@ -1,12 +1,10 @@
 :root {
 	--theme-color-1: #24247a;
 	--theme-color-2: #cd9834;
-	--theme-color-3: #90CEA1;
+	--theme-color-3: #181818;
 	--theme-color-4: #f3a93b;
 
 	--text-color-1: #fff;
-
-	--background-content-color: rgba(0, 0, 0, .2);
 
 	--global-max-width: 1300px;
 	--global-module-size: 20px;
@@ -15,8 +13,10 @@
 	--global-radius: .9375rem;
 
 	--theme-font-family: "Roboto", sans-serif;
-	--theme-transition: 0.5s all ease;
-	--theme-box-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+	--theme-transition: all .5s ease-in-out;
+	--theme-transition2: all .3s ease-in-out;
+	--theme-box-shadow: 0 0 40px 5px rgb(0 0 0 / 5%);
+	--theme-box-shadow2: 0 0 15px rgba(0, 0, 0, 0.17);
 }
 
 body {
