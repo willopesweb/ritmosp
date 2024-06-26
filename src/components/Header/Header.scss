@@ -57,10 +57,12 @@ $desktop: 600;
         transform: translateX(0);
       }
     }
+
   }
 
   &__menu-item {
     color: var(--text-color-1);
+    cursor: pointer;
     font-weight: bold;
     padding: rem(10);
     display: flex;
@@ -80,6 +82,14 @@ $desktop: 600;
       width: auto;
     }
 
+  }
+
+  &__social {
+    --social-icon-color: #fff;
+
+    @include breakpoint($desktop) {
+      --social-icon-color: var(--theme-color-1);
+    }
   }
 
   &__buttons {

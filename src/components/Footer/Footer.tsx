@@ -2,6 +2,9 @@ import React from 'react';
 import Icon from '../Icon';
 import "./Footer.scss"
 import { Lojas } from '../../lojas';
+import Social from '../Social/Social';
+import { ReactSVG } from 'react-svg';
+import LogoDiv from "../../assets/img/div.svg";
 
 const Footer = () => {
   const year = new Date().getFullYear();
@@ -34,7 +37,15 @@ const Footer = () => {
       </div>
       <div className="l-footer__subfooter">
         <div className="l-footer__subfooter-content">
-          © Copyright {year} Todos direitos Reservados - RitmoSP.
+          <p>© Copyright {year} Todos direitos Reservados - RitmoSP.</p>
+          <div className="l-footer__social">
+            <Social />
+          </div>
+          <div className="l-footer__div">
+            <a href="https://divpropaganda.com.br/" target="_blank">
+              <ReactSVG src={LogoDiv} />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

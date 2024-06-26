@@ -1,6 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useCars } from '../context/CarsContext';
+import Car from '../components/Car/Car';
 
 const Home = () => {
   const { cars, loading, error } = useCars();
@@ -17,11 +17,10 @@ const Home = () => {
     <main >
       <div className="l-home__content">
         {cars.length > 0 ? (
+
           <ul>
             {cars.map((car) => (
-              <li key={car.Id}>
-                <Link to={`/carro/${car.Id}`}>{car.Modelo}</Link>
-              </li>
+              <Car key={car.Id} car={car} />
             ))}
           </ul>
         ) : (

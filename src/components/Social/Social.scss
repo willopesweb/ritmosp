@@ -1,0 +1,23 @@
+@import "../../assets/scss/abstracts";
+
+.c-social {
+  display: flex;
+  gap: rem(10);
+
+  a {
+    color: inherit;
+
+    svg path {
+      fill: var(--social-icon-color);
+      transition: var(--theme-transition);
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      svg path {
+        fill: var(--theme-color-2);
+      }
+    }
+  }
+}
