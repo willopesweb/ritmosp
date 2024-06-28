@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { CarInterface } from '../../types';
 import "./Car.scss";
+import Icon from '../Icon';
+import Button from '../Button/Button';
 
 interface CarProps {
   key: string | number;
@@ -11,7 +13,33 @@ interface CarProps {
 const Car = ({ car }: CarProps) => {
   return (
     <article className="c-car">
-      <Link to={`/carro/${car.Id}`}>{car.Modelo}</Link>
+      <Link to={`/carro/${car.Id}`}>
+        <header className="c-car__header">
+          <i className="c-car__marca">{car.Marca}</i>
+          <span className="c-car__ano">{car.AnoFabricacao}/{car.AnoModelo}</span>
+        </header>
+        <div className="c-car__photo">
+          <img loading="lazy" height="100" src={car.Fotos[0]} alt={`${car.Modelo} ${car.Versao}`} />
+        </div>
+        <div className="c-car__title">
+          <h1>{car.Modelo} {car.Versao}</h1>
+        </div>
+
+        <div className="c-car__content">
+          <div>
+            Por Apenas:
+            <span className="c-car__price">{car.Preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+          </div>
+          <div className="c-car__address">
+            <Icon icon="location" size="40" />
+            <span>{car.Loja}</span>
+          </div>
+
+        </div>
+      </Link>
+      <footer className="c-car__footer">
+        <Button link={true} href="#" target="_blank" label="Fale com um consultor" />
+      </footer>
     </article>
   )
 }

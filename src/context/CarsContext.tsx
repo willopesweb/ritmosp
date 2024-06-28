@@ -17,43 +17,39 @@ export const CarProvider = ({ children }: { children: ReactNode }) => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const getCars = async (cnpj: string) => {
-      try {
-        const request = createAdsetApiRequest(cnpj);
-        const fetchedCars = await fetchCars(request);
-        return fetchedCars;
-      } catch (error) {
-        console.error('Erro ao buscar carros:', error);
-        return [];
-      }
-    }
-
     const fetchAllCars = async () => {
-      if (cars.length === 0) {
-        try {
-          const carRequests = Lojas.map(loja => getCars(loja.cnpj));
-          const allCarsResponses = await Promise.all(carRequests);
+      try {
+        const carRequests = Lojas.map(loja => getCars(loja.cnpj));
+        const allCarsResponses = await Promise.all(carRequests);
 
-          const successfulResponses = allCarsResponses.filter(cars => cars.length > 0);
-          if (successfulResponses.length > 0) {
-            const mergedCars = successfulResponses.flat();
-            setCars(mergedCars);
-            setError(null); // Reset error if we have successful responses
-          } else {
-            setError('Erro ao buscar carros.');
-          }
-        } catch (error) {
+        const successfulResponses = allCarsResponses.filter(cars => cars.length > 0);
+        if (successfulResponses.length > 0) {
+          const mergedCars = successfulResponses.flat();
+          setCars(mergedCars);
+          setError(null); // Reset error if we have successful responses
+        } else {
           setError('Erro ao buscar carros.');
-        } finally {
-          setLoading(false);
         }
-      } else {
+      } catch (error) {
+        setError('Erro ao buscar carros.');
+      } finally {
         setLoading(false);
       }
     }
 
     fetchAllCars();
-  }, [cars]);
+  }, []);
+
+  const getCars = async (cnpj: string) => {
+    try {
+      const request = createAdsetApiRequest(cnpj);
+      const fetchedCars = await fetchCars(request);
+      return fetchedCars;
+    } catch (error) {
+      console.error('Erro ao buscar carros:', error);
+      return [];
+    }
+  }
 
   return (
     <CarContext.Provider value={{ cars, loading, error }}>

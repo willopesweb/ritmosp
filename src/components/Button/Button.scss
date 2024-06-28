@@ -1,0 +1,41 @@
+$component-name: c-button;
+
+.#{$component-name} {
+  text-decoration: none;
+  font-family: var(--thee-font-family);
+  background-color: var(--theme-color-2);
+  border: 2px solid var(--theme-color-2);
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  transition: var(--theme-transition);
+  padding: 10px 20px;
+
+  &:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+  }
+
+
+  &:not(:disabled):hover,
+  &:not(:disabled):focus,
+  &:not(:disabled):active {
+    background-color: var(--theme-color-3);
+    border-color: var(--theme-color-3);
+    color: #fff;
+  }
+
+  &--secondary {
+    background-color: transparent;
+    color: var(--theme-color-1);
+    border-color: var(--theme-color-1);
+
+    &:not(:disabled):hover,
+    &:not(:disabled):focus,
+    &:not(:disabled):active {
+      background-color: transparent;
+      border-color: var(--theme-color-2);
+      color: var(--theme-color-2);
+    }
+  }
+}

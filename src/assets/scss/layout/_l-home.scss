@@ -2,4 +2,22 @@
   &__content {
     @include content;
   }
+
+  &__cars {
+    display: grid;
+    gap: var(--global-module-size);
+
+    @include breakpoint(600) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+
+    @include breakpoint(800) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    @include breakpoint(1200) {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
 }

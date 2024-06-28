@@ -18,7 +18,7 @@ const Home = () => {
       <div className="l-home__content">
         {cars.length > 0 ? (
 
-          <ul>
+          <ul className="l-home__cars">
             {cars.map((car) => (
               <Car key={car.Id} car={car} />
             ))}
