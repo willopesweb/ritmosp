@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { CarInterface } from '../../types';
 import "./Car.scss";
@@ -17,7 +17,7 @@ const Car = ({ car }: CarProps) => {
 
   return (
     <article className="c-car">
-      <Link to={`/carro/${link}`}>
+      <Link to={`carro/${link}`}>
         <header className="c-car__header">
           <i className="c-car__marca">{car.Marca}</i>
           <span className="c-car__ano">{car.AnoFabricacao}/{car.AnoModelo}</span>

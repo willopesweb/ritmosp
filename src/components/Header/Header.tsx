@@ -40,7 +40,7 @@ const Header = () => {
       <header className='l-header'>
         <div className='l-header__content' >
           <div className="l-header__logo">
-            <Link to="/">
+            <Link to="/seminovos">
               <img width="150" src={logo} alt="Ritmo SP" />
             </Link>
           </div>

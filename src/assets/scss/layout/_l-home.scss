@@ -6,6 +6,12 @@
     min-height: 50vh;
   }
 
+  &__404 {
+    color: var(--theme-color-1);
+    flex-direction: column;
+    gap: var(--global-module-size);
+  }
+
   &__header {
     @include content;
     align-items: center;
