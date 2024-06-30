@@ -4,6 +4,7 @@ import { CarInterface } from '../../types';
 import "./Car.scss";
 import Icon from '../Icon';
 import Button from '../Button/Button';
+import { formatParamURL } from '../../utils';
 
 interface CarProps {
   key: string | number;
@@ -11,9 +12,12 @@ interface CarProps {
 }
 
 const Car = ({ car }: CarProps) => {
+
+  const link = formatParamURL(`${car.Modelo}${car.Versao}`);
+
   return (
     <article className="c-car">
-      <Link to={`/carro/${car.Id}`}>
+      <Link to={`/carro/${link}`}>
         <header className="c-car__header">
           <i className="c-car__marca">{car.Marca}</i>
           <span className="c-car__ano">{car.AnoFabricacao}/{car.AnoModelo}</span>

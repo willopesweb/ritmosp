@@ -2,6 +2,7 @@ $component-name: c-button;
 
 .#{$component-name} {
   text-decoration: none;
+  text-align: center;
   font-family: var(--theme-font-family);
   background-color: var(--theme-color-2);
   border: 2px solid var(--theme-color-2);
