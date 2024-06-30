@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.scss';
+import './Backtotop.scss';
 import logo from "../../assets/img/logo.png";
 import { Link } from 'react-router-dom';
 import Icon from '../Icon';
@@ -10,6 +11,29 @@ const Header = () => {
 
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const [isAboutBoxActive, setIsAboutBoxActive] = useState(false);
+  const [isBackToTopActive, setIsBackToTopActive] = useState(false);
+
+  const handleBackToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      setIsBackToTopActive(true);
+    } else {
+      setIsBackToTopActive(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
@@ -37,6 +61,9 @@ const Header = () => {
         </div>
       </header>
       <About active={isAboutBoxActive} setActive={setIsAboutBoxActive} />
+      <span className={`c-backtotop ${isBackToTopActive ? 'is-active' : ''}`} onClick={handleBackToTop}>
+        <Icon icon="arrow-up" size="20" />
+      </span>
     </>
   )
 }

@@ -51,4 +51,8 @@ export interface LojaInterface {
   address: string;
 }
 
+export interface BrandInterface {
+  brand: string;
+  models: string[];
+}
 

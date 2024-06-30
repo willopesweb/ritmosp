@@ -38,7 +38,9 @@ const Car = ({ car }: CarProps) => {
         </div>
       </Link>
       <footer className="c-car__footer">
-        <Button link={true} href="#" target="_blank" label="Fale com um consultor" />
+        <Button link={true} href="#" target="_blank" label="Fale com um consultor">
+          <Icon icon="whatsapp" size="20" />
+        </Button>
       </footer>
     </article>
   )

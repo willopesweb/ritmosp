@@ -1,0 +1,105 @@
+@import "../../assets/scss/abstracts";
+
+$component-name: c-input;
+
+.#{$component-name} {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+
+  &:has(input[type="checkbox"]) {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: nowrap;
+  }
+
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    font-family: var(--theme-font-family);
+    font-size: rem(14);
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+  }
+
+  input[type="range"] {
+    width: 70%;
+    display: flex;
+    gap: 100px;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    @include breakpoint(1200) {
+      width: 80%;
+    }
+
+    &::after {
+      content: attr(value) " " attr(unit);
+      display: flex;
+      font-family: "Montserrat", sans-serif;
+      font-size: 16px;
+      position: absolute;
+      left: calc(100% + 10px);
+      top: -3px;
+      width: max-content;
+    }
+  }
+
+  textarea {
+    width: 100%;
+    height: 100px;
+    text-align: left;
+  }
+
+  &__title {
+    font-weight: bold;
+    flex-basis: 100%;
+    font-size: rem(16);
+    line-height: rem(20);
+  }
+
+  &__tooltip {
+    font-size: rem(24);
+    font-weight: bold;
+    margin-left: rem(3);
+    color: var(--theme-color-2);
+    transition: var(--theme-transition);
+    position: relative;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--theme-color-3);
+
+      &::after {
+        opacity: 1;
+        visibility: visible;
+        z-index: z-index("above");
+      }
+    }
+
+    &::after {
+      content: attr(data-tooltip);
+      background-color: var(--theme-color-1);
+      color: #fff;
+      font-size: 14px;
+      padding: 5px;
+      border-radius: 5px;
+      position: absolute;
+      top: 20px;
+      width: max-content;
+      max-width: 250px;
+      left: -125px;
+      transition: var(--theme-transition);
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+
+
+
+}

@@ -2,7 +2,7 @@ $component-name: c-button;
 
 .#{$component-name} {
   text-decoration: none;
-  font-family: var(--thee-font-family);
+  font-family: var(--theme-font-family);
   background-color: var(--theme-color-2);
   border: 2px solid var(--theme-color-2);
   border-radius: 5px;
@@ -10,6 +10,14 @@ $component-name: c-button;
   cursor: pointer;
   transition: var(--theme-transition);
   padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  svg path {
+    fill: #fff;
+  }
+
 
   &:disabled {
     opacity: .5;

@@ -13,6 +13,7 @@ const Button = (props: ButtonProps) => {
   if (link) {
     return (
       <a className="c-button" title={props.label} {...rest} >
+        {props.children}
         {label}
       </a>
     );
