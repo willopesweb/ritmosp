@@ -18,7 +18,6 @@ const Home = () => {
   const [anoModeloDe, setAnoModeloDe] = useState('');
   const [anoModeloAte, setAnoModeloAte] = useState('');
   const [combustivel, setCombustivel] = useState('');
-  const [kmDe, setKmDe] = useState('');
   const [kmAte, setKmAte] = useState('');
   const [precoDe, setPrecoDe] = useState('');
   const [precoAte, setPrecoAte] = useState('');
@@ -38,6 +37,7 @@ const Home = () => {
 
   useEffect(() => {
     let filteredBrand = brands.filter((el) => el.brand === marca.toUpperCase());
+    setModelo("");
 
     if (filteredBrand.length > 0) {
       setModelsOptions(
@@ -50,7 +50,6 @@ const Home = () => {
       setModelsOptions(
         [defaultModelOption]
       );
-      setModelo("");
     }
   }, [marca]);
 
@@ -88,16 +87,8 @@ const Home = () => {
       type: "number",
     },
     {
-      name: "kmDe",
-      label: "KM",
-      placeholder: "De",
-      value: kmDe,
-      setValue: setKmDe,
-      type: "number",
-    },
-    {
       name: "kmAte",
-      label: "",
+      label: "Km máxima",
       placeholder: "Até",
       value: kmAte,
       setValue: setKmAte,
@@ -105,16 +96,16 @@ const Home = () => {
     },
     {
       name: "precoDe",
-      label: "Preço",
-      placeholder: "De",
+      label: "Valor mínimo",
+      placeholder: "R$ 0",
       value: precoDe,
       setValue: setPrecoDe,
       type: "text",
     },
     {
       name: "precoAte",
-      label: "",
-      placeholder: "Até",
+      label: "Valor máximo",
+      placeholder: "R$ 0",
       value: precoAte,
       setValue: setPrecoAte,
       type: "number",
@@ -145,8 +136,16 @@ const Home = () => {
 
   if (error) {
     return <main>
-      <div className="l-home__content">
-        {error}
+      <div className="l-page__content">
+        <p className="l-page__error">{error}</p>
+      </div>
+    </main>;
+  }
+
+  if (loading) {
+    return <main>
+      <div className="l-page__content">
+        <Loading />
       </div>
     </main>;
   }
@@ -185,8 +184,9 @@ const Home = () => {
       <div className="l-home__header">
         <h2 className="l-home__title">Seminovos</h2>
       </div>
-      <div className="l-home__filters">
-        <div className="l-home__filters-content">
+
+      <div className="l-home__content">
+        <div className="l-home__filters">
           {
             filters.map(filter => (
               <Input
@@ -201,29 +201,28 @@ const Home = () => {
               />
             ))
           }
+        </div>
 
+        <div className="l-home__results">
           <Input name="order" label="Ordenar por" type='select' options={[
             { label: "Maior Preço", value: "Maior Preço" },
             { label: "Menor Preço", value: "Menor Preço" },
             { label: "A - Z", value: "A - Z" },
             { label: "Z - A", value: "Z - A" },
           ]} value={sortOption} callback={setSortOption} />
+
+          {
+            sortedCars.length > 0 ? (
+              <ul className="l-home__cars">
+                {sortedCars.map((car) => (
+                  <Car key={car.Id} car={car} />
+                ))}
+              </ul>
+            ) : (
+              <div>Nenhum carro encontrado.</div>
+            )
+          }
         </div>
-      </div>
-      <div className="l-home__content">
-        {loading ? (
-          <Loading />
-        ) : (
-          sortedCars.length > 0 ? (
-            <ul className="l-home__cars">
-              {sortedCars.map((car) => (
-                <Car key={car.Id} car={car} />
-              ))}
-            </ul>
-          ) : (
-            <div>Nenhum carro encontrado.</div>
-          )
-        )}
       </div>
     </main>
   );

@@ -18,10 +18,17 @@ $component-name: c-input;
   select,
   textarea {
     font-family: var(--theme-font-family);
-    font-size: rem(14);
+    font-size: rem(18);
     width: 100%;
-    padding: 5px;
     text-align: center;
+
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    color: #495057;
+    min-width: 0;
+    outline: none;
+    padding: .375rem .75rem;
+    width: 100%;
   }
 
   input[type="range"] {
@@ -58,8 +65,9 @@ $component-name: c-input;
   &__title {
     font-weight: bold;
     flex-basis: 100%;
-    font-size: rem(16);
+    font-size: rem(18);
     line-height: rem(20);
+    margin-bottom: rem(5);
   }
 
   &__tooltip {

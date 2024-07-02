@@ -1,0 +1,14 @@
+.l-page {
+  &__content {
+    @include content;
+    align-items: center;
+    justify-content: center;
+    min-height: 50vh;
+    color: var(--theme-color-1);
+  }
+
+  &__404 {
+    flex-direction: column;
+    gap: var(--global-module-size);
+  }
+}

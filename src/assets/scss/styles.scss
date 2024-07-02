@@ -3,10 +3,11 @@
 @import "base/reset";
 @import "base/helpers";
 @import "layout/l-home";
+@import "layout/l-page";
 @import "layout/l-car";
 
 body {
-  color: var(--text-color-1);
+  color: var(--theme-color-1);
 }
 
 main {
