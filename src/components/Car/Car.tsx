@@ -5,6 +5,7 @@ import "./Car.scss";
 import Icon from '../Icon';
 import Button from '../Button/Button';
 import { formatParamURL } from '../../utils';
+import Image from '../Image/Image';
 
 interface CarProps {
   key: string | number;
@@ -19,14 +20,28 @@ const Car = ({ car }: CarProps) => {
     <article className="c-car">
       <Link to={`carro/${link}`}>
         <header className="c-car__header">
-          <i className="c-car__marca">{car.Marca}</i>
-          <span className="c-car__ano">{car.AnoFabricacao}/{car.AnoModelo}</span>
+          <i className="c-car__brand">{car.Marca}</i>
+          <span className="c-car__year">{car.AnoFabricacao}/{car.AnoModelo}</span>
         </header>
-        <div className="c-car__photo">
-          <img loading="lazy" height="100" src={car.Fotos[0]} alt={`${car.Modelo} ${car.Versao}`} />
-        </div>
+        <Image
+          containerClass="c-car__photo"
+          height="100"
+          src={car.Fotos[0]}
+          alt={`${car.Modelo} ${car.Versao}`}
+        />
         <div className="c-car__title">
           <h1>{car.Modelo} {car.Versao}</h1>
+        </div>
+
+        <div className="c-car__info">
+          <span>
+            <Icon icon="tachometer" size="20" />
+            {car.Km.toLocaleString('pt-BR')} KM
+          </span>
+          <span>
+            <Icon icon="cog" size="20" />
+            {car.Combustivel}
+          </span>
         </div>
 
         <div className="c-car__content">

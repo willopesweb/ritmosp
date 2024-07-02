@@ -15,6 +15,22 @@
     }
   }
 
+  &__info {
+    display: grid;
+    padding: rem(10);
+    gap: rem(5);
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
+
+    span {
+      display: flex;
+      gap: rem(5);
+      font-size: rem(18);
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
   &__header {
     background-color: var(--theme-color-4);
     padding: var(--card-padding-size);
@@ -23,15 +39,16 @@
     justify-content: space-between;
   }
 
-  &__marca {
-    font-weight: bold;
+  &__brand {
     color: var(--theme-color-2);
     font-size: rem(20);
+    font-weight: bold;
   }
 
-  &__ano {
-    font-weight: bold;
+  &__year {
+    color: #fff;
     font-size: rem(20);
+    font-weight: bold;
   }
 
   &__photo {

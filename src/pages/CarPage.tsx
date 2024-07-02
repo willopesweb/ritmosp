@@ -6,6 +6,7 @@ import Loading from '../components/Loading/Loading';
 import Icon from '../components/Icon';
 import Button from '../components/Button/Button';
 import { formatParamURL } from '../utils';
+import Image from '../components/Image/Image';
 
 
 const CarPage = () => {
@@ -16,7 +17,7 @@ const CarPage = () => {
 
   if (loading) {
     return <main>
-      <div className="l-home__content">
+      <div className="l-page__content">
         <Loading />
       </div>
     </main>;
@@ -25,14 +26,14 @@ const CarPage = () => {
 
   if (error || !car) {
     return <main>
-      <div className="l-home__content">
+      <div className="l-page__content">
         {error ? error : "Carro não encontrado."}
       </div>
     </main>;
   }
 
   return (
-    <main>
+    <main className="l-car">
       <section className="l-car__content">
         <header className="l-car__header">
           <h1>{car.Modelo} {car.Versao} </h1>
@@ -52,6 +53,10 @@ const CarPage = () => {
               {car.Km.toLocaleString('pt-BR')} KM
             </li>
             <li>
+              <Icon icon="cog" size="20" />
+              {car.Combustivel}
+            </li>
+            <li>
               <Icon icon="location" size="20" />
               {car.Loja}
             </li>
@@ -65,12 +70,20 @@ const CarPage = () => {
             </li>
           </ul>
           <div className="l-car__photos">
-            <div className="l-car__main-photo">
-              <img src={featuredPhoto === "" && car.Fotos.length > 0 ? car.Fotos[0] : featuredPhoto} alt={`${car.Modelo} ${car.Versao}`} />
-            </div>
+            <Image
+              containerClass="l-car__main-photo"
+              src={featuredPhoto === "" && car.Fotos.length > 0 ? car.Fotos[0] : featuredPhoto}
+              alt={`${car.Modelo} ${car.Versao}`}
+            />
             <ul className="l-car__photos-list">
               {car.Fotos.length > 0 && car.Fotos.map(photo => (
-                <li key={photo} onClick={() => setFeaturedPhoto(photo)}><img height="100" width="100" loading="lazy" src={photo} /></li>
+                <li key={photo} onClick={() => setFeaturedPhoto(photo)}>
+                  <Image
+                    height="100"
+                    width="100"
+                    loading="lazy"
+                    src={photo} />
+                </li>
               ))}
             </ul>
           </div>
@@ -80,10 +93,12 @@ const CarPage = () => {
           <h2 className="l-car__optionals-title">
             Opcionais
           </h2>
-          <p>{car.Opcionais}</p>
+          <ul className="l-car__optionals-list">{car.Opcionais.split(", ").map(optional => (
+            <li key={optional}>{optional}</li>
+          ))}</ul>
         </article>
       </section>
-    </main>
+    </main >
   );
 }
 

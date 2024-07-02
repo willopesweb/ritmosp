@@ -5,9 +5,9 @@ const Page404 = () => {
 
   return (
     <main>
-      <div className="l-home__content l-home__404" >
+      <div className="l-page__content l-page__404" >
         <h1>Página não encontrada</h1>
-        <Link to="/">Volta para home</Link>
+        <Link to="/seminovos">Volta para home</Link>
       </div>
     </main>
   );
