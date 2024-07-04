@@ -15,19 +15,18 @@ $component-name: c-input;
 
   input[type="text"],
   input[type="number"],
+  input[type="email"],
   select,
   textarea {
     font-family: var(--theme-font-family);
     font-size: rem(18);
     width: 100%;
-    text-align: center;
-
-    border: 1px solid #ced4da;
+    border: 1px solid #18131f;
     border-radius: .25rem;
     color: #495057;
     min-width: 0;
     outline: none;
-    padding: .375rem .75rem;
+    padding: rem(10);
     width: 100%;
   }
 

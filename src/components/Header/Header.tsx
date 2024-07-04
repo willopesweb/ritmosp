@@ -47,7 +47,12 @@ const Header = () => {
           <nav className={isMobileMenuActive ? 'l-header__menu is-active' : 'l-header__menu'} aria-label="Menu principal"
           >
             <span className="l-header__menu-item" onClick={() => setIsAboutBoxActive(true)}>Quem Somos</span>
-            <a href="https://www.ritmosp.com.br/" className="l-header__menu-item">Novos</a>
+            <a href="https://www.ritmosp.com.br/#carros" className="l-header__menu-item">Carros</a>
+            <a href="https://www.ritmosp.com.br/#suvs" className="l-header__menu-item">SUVS</a>
+            <a href="https://www.ritmosp.com.br/#picapes" className="l-header__menu-item">Picapes</a>
+            <a href="https://www.ritmosp.com.br/#esportivos" className="l-header__menu-item">Esportivos</a>
+            <a href="https://www.ritmosp.com.br/#eletricos" className="l-header__menu-item">Elétricos</a>
+            <a href="https://www.ritmosp.com.br/seminovos" className="l-header__menu-item">Seminovos</a>
             <div className="l-header__social">
               <Social />
             </div>

@@ -204,12 +204,19 @@ const Home = () => {
         </div>
 
         <div className="l-home__results">
-          <Input name="order" label="Ordenar por" type='select' options={[
-            { label: "Maior Preço", value: "Maior Preço" },
-            { label: "Menor Preço", value: "Menor Preço" },
-            { label: "A - Z", value: "A - Z" },
-            { label: "Z - A", value: "Z - A" },
-          ]} value={sortOption} callback={setSortOption} />
+          <div className="l-home__results-header">
+            <ul className="l-home__breadcrumbs">
+              <li><a href="https://www.ritmosp.com.br/">Home</a></li>
+              <li><span>Seminovos</span></li>
+            </ul>
+            <Input name="order" label="Ordenar por" type='select' options={[
+              { label: "Maior Preço", value: "Maior Preço" },
+              { label: "Menor Preço", value: "Menor Preço" },
+              { label: "A - Z", value: "A - Z" },
+              { label: "Z - A", value: "Z - A" },
+            ]} value={sortOption} callback={setSortOption} />
+          </div>
+
 
           {
             sortedCars.length > 0 ? (

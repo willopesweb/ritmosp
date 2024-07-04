@@ -1,5 +1,9 @@
 .c-image {
+  max-width: 100%;
 
+  img {
+    max-width: 100%;
+  }
 
   &.is-loading {
     position: relative;

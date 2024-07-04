@@ -76,6 +76,7 @@ export const Input = ({
           <textarea
             name={name}
             value={value}
+            placeholder={placeholder}
             onChange={(e) => callback(e.target.value)}
             rows={5}
             cols={33}

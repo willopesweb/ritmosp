@@ -36,7 +36,7 @@ const Car = ({ car }: CarProps) => {
         <div className="c-car__info">
           <span>
             <Icon icon="tachometer" size="20" />
-            {car.Km.toLocaleString('pt-BR')} KM
+            {car.Km && car.Km.toLocaleString('pt-BR')} KM
           </span>
           <span>
             <Icon icon="cog" size="20" />

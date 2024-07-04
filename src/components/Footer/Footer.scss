@@ -10,7 +10,7 @@
     padding-bottom: calc(var(--global-module-size) * 3);
     gap: calc(var(--global-module-size) * 2);
 
-    @include breakpoint(400) {
+    @include breakpoint(600) {
       grid-template-columns: 1fr 1fr;
     }
 

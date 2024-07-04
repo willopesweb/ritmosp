@@ -1,3 +1,5 @@
+$desktop: 1200;
+
 .l-car {
   &__content {
     @include content;
@@ -14,21 +16,72 @@
   }
 
   &__info {
-    background-color: var(--theme-color-5);
     display: grid;
-    grid-template-columns: 400px calc(100% - 400px);
     width: 100%;
+
+    @include breakpoint($desktop) {
+      grid-template-columns: calc(100% - 400px) 400px;
+    }
+  }
+
+  &__main {
+    background-color: var(--theme-color-5);
+    padding: var(--global-module-size);
+    margin-top: var(--global-module-size);
+
+    @include breakpoint($desktop) {
+      margin-top: 0;
+      margin-left: var(--global-module-size);
+    }
   }
 
   &__photos {
     display: flex;
     flex-direction: column;
+    overflow: hidden;
+  }
+
+  &__form {
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: rem(10);
+      align-items: center;
+      justify-content: center;
+
+      .c-input {
+        width: 100%;
+      }
+
+      .c-input:not(:has(textarea, select)) {
+        span {
+          position: absolute;
+          top: 0;
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      .c-button {
+        font-size: rem(18);
+        margin-top: rem(10)
+      }
+    }
+  }
+
+  &__form-title {
+    font-size: rem(28);
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: rem(10);
   }
 
   &__main-photo {
     width: 100%;
     height: rem(500);
     border-left: 5px solid transparent;
+    max-width: 100%;
 
     img {
       width: 100%;
@@ -40,17 +93,23 @@
 
   &__photos-list {
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    ul {
+      display: inline-block;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+    }
 
 
     li {
+      display: inline-block;
       cursor: pointer;
       transition: var(--theme-transition2);
       border: 5px solid transparent;
-      height: rem(150);
+      height: rem(100);
+      width: rem(100);
 
       &:hover,
       &:focus,
@@ -74,20 +133,34 @@
   }
 
   &__details {
-    text-transform: uppercase;
+    display: grid;
     font-weight: bold;
-    font-size: rem(18);
     width: 100%;
-    padding: var(--global-module-size);
+    gap: rem(10);
+    margin-top: var(--global-module-size);
 
-    li:not(.l-car__price) {
+    @include breakpoint(800) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    li {
       color: var(--theme-color-1);
-      padding-top: rem(10);
-      padding-bottom: rem(10);
-      border-bottom: 1px solid var(--theme-color-1);
+      background-color: var(--theme-color-5);
+      padding: var(--global-module-size);
+      border-radius: rem(5);
       display: flex;
       align-items: center;
-      gap: rem(10)
+      gap: rem(10);
+
+      div {
+        width: 100%;
+        text-align: right;
+
+        p {
+          text-transform: uppercase;
+          font-size: rem(24);
+        }
+      }
     }
   }
 
@@ -102,13 +175,10 @@
 
     span {
       color: var(--theme-color-1);
-    }
-
-    span.interested {
-      color: var(--theme-color-1);
       font-size: rem(28);
-      text-transform: capitalize;
-      margin-bottom: rem(10);
+      font-weight: bold;
+      text-transform: uppercase;
+
     }
 
     b {
@@ -116,19 +186,30 @@
       font-size: rem(32);
       margin-bottom: var(--global-module-size);
     }
+  }
 
+  &__address {
+    display: flex;
+    gap: rem(10);
+    font-weight: bold;
+    margin-bottom: var(--global-module-size);
   }
 
   &__optionals {
     padding: var(--global-module-size);
     background-color: var(--theme-color-6);
-    width: 100%;
+    margin-top: var(--global-module-size);
+  }
+
+  &__optionals-content {
+    @include content;
   }
 
   &__optionals-title {
     color: var(--theme-color-2);
     font-style: italic;
     text-transform: uppercase;
+    width: 100%;
   }
 
   &__optionals-list {
