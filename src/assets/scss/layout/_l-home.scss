@@ -44,6 +44,35 @@
     }
   }
 
+  &__filter-condition {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    span {
+      cursor: pointer;
+      transition: var(--theme-transition2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: rem(20);
+      font-weight: bold;
+      background-color: var(--theme-color-5);
+      padding: rem(10);
+      width: 100%;
+
+      &:hover,
+      &:focus,
+      &:active {
+        background-color: var(--theme-color-2);
+      }
+
+      &.is-active {
+        background-color: var(--theme-color-1);
+        color: #fff;
+      }
+    }
+  }
+
 
   &__results {
     display: flex;

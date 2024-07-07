@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useCars } from '../context/CarsContext';
 import Car from '../components/Car/Car';
 import Loading from '../components/Loading/Loading';
+import Notification from '../components/Notification/Notification';
 import { Input, InputInterface, OptionsInterface } from '../components/Input/Input';
 
 
@@ -13,6 +14,7 @@ const Home = () => {
   const { cars, brands, loading, error } = useCars();
   const [modelsOptions, setModelsOptions] = useState<OptionsInterface[]>([]);
 
+  const [condicao, setConficao] = useState('Usado');
   const [marca, setMarca] = useState('');
   const [modelo, setModelo] = useState('');
   const [anoModeloDe, setAnoModeloDe] = useState('');
@@ -137,7 +139,7 @@ const Home = () => {
   if (error) {
     return <main>
       <div className="l-page__content">
-        <p className="l-page__error">{error}</p>
+        <Notification type="error" message={error} />
       </div>
     </main>;
   }
@@ -151,6 +153,7 @@ const Home = () => {
   }
 
   const filteredCars = cars.filter(car =>
+    (condicao === car.Condicao) &&
     (marca === '' || car.Marca.toLowerCase().includes(marca.toLowerCase())) &&
     (modelo === '' || car.Modelo.toLowerCase().includes(modelo.toLowerCase())) &&
     (anoModeloDe === '' || car.AnoModelo >= parseInt(anoModeloDe)) &&
@@ -187,6 +190,10 @@ const Home = () => {
 
       <div className="l-home__content">
         <div className="l-home__filters">
+          <div className="l-home__filter-condition">
+            <span className={condicao !== "Usado" ? "is-active" : ""} onClick={() => setConficao("Novo")}>0km</span>
+            <span className={condicao === "Usado" ? "is-active" : ""} onClick={() => setConficao("Usado")}>Seminovos</span>
+          </div>
           {
             filters.map(filter => (
               <Input
@@ -225,7 +232,7 @@ const Home = () => {
                 ))}
               </ul>
             ) : (
-              <div>Nenhum carro encontrado.</div>
+              <Notification type="error" message="Nenhum carro encontrado." />
             )
           }
         </div>

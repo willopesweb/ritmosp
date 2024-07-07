@@ -33,7 +33,6 @@ const Form = () => {
         contactFrom
       });
 
-      // Verificar a resposta do servidor
       if (response.status === 200) {
         setSuccess(true);
         setError(null);
