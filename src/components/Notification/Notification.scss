@@ -32,6 +32,7 @@ $component-name: c-notification;
       opacity: 1;
       transform: translateX(-100px);
       visibility: visible;
+      z-index: z-index("notification");
     }
   }
 }

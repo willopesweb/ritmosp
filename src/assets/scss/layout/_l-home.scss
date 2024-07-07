@@ -82,8 +82,17 @@
 
   &__results-header {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
+    flex-direction: column;
+    padding-top: var(--global-module-size);
+    gap: var(--global-module-size);
+
+    @include breakpoint(600) {
+      align-items: flex-end;
+      flex-direction: row;
+      padding-top: 0;
+    }
   }
 
   &__breadcrumbs {

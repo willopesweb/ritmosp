@@ -18,8 +18,12 @@ $component-name: c-modal;
     flex-direction: column;
     background-color: white;
     padding: var(--global-module-size);
-    min-width: rem(646);
     border-radius: var(--global-radius);
+    max-width: 90%;
+
+    @include breakpoint(700) {
+      min-width: rem(646);
+    }
   }
 
   &__header {

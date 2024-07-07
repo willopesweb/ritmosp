@@ -3,7 +3,7 @@ import axios from "axios";
 const API_USER = import.meta.env.VITE_ADSET_API_USER;
 const API_PASSWORD = import.meta.env.VITE_ADSET_API_PASSWORD;
 //const BASE_URL = '/integrador/api/estoqueveiculos';
-const BASE_URL = "https://www.ritmosp.com.br/requestAdset.php";
+const BASE_URL = "https://www.ritmosp.com.br/seminovos/requestAdset.php";
 
 export const fetchCars = async () => {
   try {

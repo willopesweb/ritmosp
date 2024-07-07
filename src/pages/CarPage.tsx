@@ -111,13 +111,13 @@ const CarPage = () => {
               <span className="only">Por apenas</span>
               <b>{car.Preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
 
-              <Button link={true} href={`https://api.whatsapp.com/send?phone=${formatPhoneNumber(whatsapp)}&text=Olá, tenho interesse no carro ${car.Modelo}${car.Versao}`} target="_blank" label="Fale com um consultor">
+              <Button link={true} href={`https://api.whatsapp.com/send?phone=${formatPhoneNumber(whatsapp as string)}&text=Olá, tenho interesse no carro ${car.Modelo}${car.Versao}`} target="_blank" label="Fale com um consultor">
                 <Icon icon="whatsapp" size="40" />
               </Button>
             </div>
             <section className="l-car__form">
               <h2 className="l-car__form-title">Solicitar proposta</h2>
-              <Form />
+              <Form vehicle={`${car.Modelo} ${car.Versao}`} />
             </section>
           </div>
         </div>

@@ -5,7 +5,7 @@ import Notification from '../Notification/Notification';
 import { useCars } from '../../context/CarsContext';
 import axios from 'axios';
 
-const Form = () => {
+const Form = ({ vehicle }: { vehicle: string }) => {
   const { email } = useCars();
   const [name, setName] = useState("");
   const [fiscalCode, setFiscalCode] = useState("");
@@ -23,21 +23,29 @@ const Form = () => {
     setError(null);
     setSuccess(false);
 
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('vehicle', vehicle);
+    formData.append('fiscalCode', fiscalCode);
+    formData.append('phone', phone);
+    formData.append('userEmail', userEmail);
+    formData.append('question', question);
+    formData.append('contactFrom', contactFrom);
+    formData.append('email', email as string);
+
     try {
-      const response = await axios.post('https://ritmosp.com.br/processForm.php', {
-        name,
-        fiscalCode,
-        phone,
-        userEmail,
-        question,
-        contactFrom
+      const response = await axios.post('https://ritmosp.com.br/seminovos/processForm.php', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
       });
 
-      if (response.status === 200) {
+      if (response.status === 200 && response.data.status === "success") {
         setSuccess(true);
         setError(null);
       } else {
-        setError('Ocorreu um erro ao enviar o formulário');
+        console.log(response);
+        setError(response.data.message ? response.data.message : 'Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde.');
         setSuccess(false);
       }
     } catch (error) {
@@ -48,14 +56,13 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input type="hidden" value={email as string} />
       <Input
         name="name"
         value={name}
         callback={setName}
         type="text"
         label="Nome"
-        required={true}
+        required={false}
         placeholder="Nome Completo"
       />
       <Input
@@ -66,7 +73,7 @@ const Form = () => {
         label="CPF/CNPJ"
         mask="cpf"
         maxLength={14}
-        required={true}
+        required={false}
         placeholder="CPF/CNPJ"
       />
       <Input
@@ -76,7 +83,7 @@ const Form = () => {
         type="text"
         mask="phone"
         maxLength={15}
-        required={true}
+        required={false}
         label="Telefone"
         placeholder="Telefone"
       />
@@ -86,7 +93,7 @@ const Form = () => {
         callback={setUserEmail}
         type="email"
         label="E-mail"
-        required={true}
+        required={false}
         placeholder="E-mail"
       />
       <Input
@@ -121,7 +128,7 @@ const Form = () => {
       <input type='submit' className="c-button" />
 
       {error && <Notification type="error" message={error} float={true} />}
-      {success && <Notification type="success" message="Formulário enviado com sucesso!" float={true} />}
+      {success && <Notification type="success" message="Mensagem enviada com sucesso!" float={true} />}
     </form>
   )
 }
