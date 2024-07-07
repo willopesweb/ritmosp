@@ -1,0 +1,60 @@
+@import "../../assets/scss/abstracts";
+$component-name: c-modal;
+
+.#{$component-name} {
+  align-items: center;
+  background: rgba(0, 0, 0, .5);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: z-index("modal");
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: var(--global-module-size);
+    min-width: rem(646);
+    border-radius: var(--global-radius);
+  }
+
+  &__header {
+    padding-bottom: var(--global-module-size);
+    position: relative;
+    text-align: center;
+  }
+
+  &__title {
+    font-weight: 500;
+    color: var(--theme-color-1);
+  }
+
+  &__close {
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: var(--theme-transition);
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    svg path {
+      //stroke: var(--theme-color-2);
+      transition: var(--theme-transition);
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      svg path {
+        stroke: var(--theme-color-2);
+      }
+    }
+  }
+}

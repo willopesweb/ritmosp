@@ -47,6 +47,7 @@ export interface LojaInterface {
   name: string;
   cnpj: string;
   phone: string;
+  email: string;
   open: string[];
   address: string;
 }

@@ -6,6 +6,8 @@ import Icon from '../Icon';
 import Button from '../Button/Button';
 import { formatParamURL } from '../../utils';
 import Image from '../Image/Image';
+import { useCars } from '../../context/CarsContext';
+import { formatPhoneNumber } from '../../utils';
 
 interface CarProps {
   key: string | number;
@@ -15,6 +17,7 @@ interface CarProps {
 const Car = ({ car }: CarProps) => {
 
   const link = formatParamURL(`${car.Modelo}${car.Versao}`);
+  const { whatsapp } = useCars();
 
   return (
     <article className="c-car">
@@ -57,7 +60,7 @@ const Car = ({ car }: CarProps) => {
         </div>
       </Link>
       <footer className="c-car__footer">
-        <Button link={true} href="#" target="_blank" label="Fale com um consultor">
+        <Button link={true} href={`https://api.whatsapp.com/send?phone=${formatPhoneNumber(whatsapp as string)}&text=Olá, tenho interesse no carro ${car.Modelo}${car.Versao}`} target="_blank" label="Fale com um consultor">
           <Icon icon="whatsapp" size="20" />
         </Button>
       </footer>

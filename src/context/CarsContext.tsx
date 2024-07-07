@@ -7,12 +7,18 @@ interface CarContextProps {
   brands: BrandInterface[];
   loading: boolean;
   error: string | null;
+  whatsapp: string | null;
+  email: string | null;
+  setEmail: (email: string) => void;
+  setWhatsapp: (whatsapp: string) => void;
 }
 
 const CarContext = createContext<CarContextProps | undefined>(undefined);
 
 export const CarProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cars, setCars] = useState<CarInterface[]>([]);
+  const [whatsapp, setWhatsapp] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
   const [brands, setBrands] = useState<BrandInterface[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -80,7 +86,7 @@ export const CarProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     } */
 
   return (
-    <CarContext.Provider value={{ cars, brands, loading, error }}>
+    <CarContext.Provider value={{ cars, brands, loading, error, whatsapp, email, setEmail, setWhatsapp }}>
       {children}
     </CarContext.Provider>
   );

@@ -1,5 +1,6 @@
 $desktop: 1200;
 
+
 .l-car {
   &__content {
     @include content;
@@ -113,7 +114,8 @@ $desktop: 1200;
 
       &:hover,
       &:focus,
-      &:active {
+      &:active,
+      &.is-active {
         border-color: var(--theme-color-2);
       }
 
@@ -217,6 +219,7 @@ $desktop: 1200;
     font-size: rem(20);
     line-height: rem(48);
     text-transform: uppercase;
+    width: 100%;
 
     @include breakpoint(600) {
       display: grid;
@@ -234,5 +237,34 @@ $desktop: 1200;
       }
     }
 
+  }
+
+  &__related {
+    @include content;
+    padding-top: var(--global-module-size);
+    padding-bottom: var(--global-module-size);
+  }
+
+  &__related-title {
+    width: 100%;
+    text-transform: uppercase;
+    font-style: italic;
+  }
+
+  &__related-content {
+    display: grid;
+    gap: var(--global-module-size);
+    padding-bottom: var(--global-module-size);
+    padding-top: var(--global-module-size);
+    width: 100%;
+
+    @include breakpoint(800) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+
+    @include breakpoint(1200) {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
   }
 }

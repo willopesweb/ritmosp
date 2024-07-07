@@ -1,31 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCars } from '../context/CarsContext';
 import { CarInterface } from '../types';
 import Loading from '../components/Loading/Loading';
 import Icon from '../components/Icon';
 import Button from '../components/Button/Button';
-import { formatParamURL } from '../utils';
+import { formatParamURL, formatPhoneNumber } from '../utils';
 import Image from '../components/Image/Image';
-import { Input } from '../components/Input/Input';
+import Car from '../components/Car/Car';
+import Form from '../components/Form/Form';
 
 
 const CarPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { cars, loading, error } = useCars();
+  const { cars, loading, error, whatsapp } = useCars();
+  const [filteredCars, setFilteredCars] = useState<CarInterface[]>([]);
   const [featuredPhoto, setFeaturedPhoto] = useState("");
   const car = cars ? cars.find((car: CarInterface) => formatParamURL(`${car.Modelo}${car.Versao}`) === id) : null;
 
-  const [name, setName] = useState("");
-  const [fiscalCode, setFiscalCode] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [question, setQuestion] = useState("");
-  const [contactFrom, setContactForm] = useState("");
+  useEffect(() => {
+    if (car) {
+      const relatedCars = cars.filter((relatedCar) => relatedCar.Marca === car.Marca);
+      setFilteredCars(relatedCars);
+    }
+  }, [car, cars]);
 
-  function handleSubmit() {
-
-  }
+  useEffect(() => {
+    if (car && car.Fotos.length > 0) setFeaturedPhoto(car.Fotos[0]);
+  }, [car]);
 
   if (loading) {
     return <main>
@@ -34,7 +36,6 @@ const CarPage = () => {
       </div>
     </main>;
   }
-
 
   if (error || !car) {
     return <main>
@@ -60,7 +61,7 @@ const CarPage = () => {
             <div className="l-car__photos-list">
               <ul>
                 {car.Fotos.length > 0 && car.Fotos.map(photo => (
-                  <li key={photo} onClick={() => setFeaturedPhoto(photo)}>
+                  <li className={featuredPhoto === photo ? "is-active" : ""} key={photo} onClick={() => setFeaturedPhoto(photo)}>
                     <Image
                       height="100"
                       width="100"
@@ -110,78 +111,14 @@ const CarPage = () => {
               <span className="only">Por apenas</span>
               <b>{car.Preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
 
-              <Button link={true} href="#" target="_blank" label="Fale com um consultor">
+              <Button link={true} href={`https://api.whatsapp.com/send?phone=${formatPhoneNumber(whatsapp)}&text=Olá, tenho interesse no carro ${car.Modelo}${car.Versao}`} target="_blank" label="Fale com um consultor">
                 <Icon icon="whatsapp" size="40" />
               </Button>
             </div>
             <section className="l-car__form">
               <h2 className="l-car__form-title">Solicitar proposta</h2>
-              <form action="" onSubmit={() => handleSubmit()}>
-                <Input
-                  name="name"
-                  value={name}
-                  callback={setName}
-                  type="text"
-                  label="Nome"
-                  placeholder="Nome Completo"
-                />
-                <Input
-                  name="fiscalCode"
-                  value={fiscalCode}
-                  callback={setFiscalCode}
-                  type="text"
-                  label="CPF/CNPJ"
-                  placeholder="CPF/CNPJ"
-                />
-                <Input
-                  name="phone"
-                  value={phone}
-                  callback={setPhone}
-                  type="text"
-                  label="Telefone"
-                  placeholder="Telefone"
-                />
-                <Input
-                  name="email"
-                  value={email}
-                  callback={setEmail}
-                  type="email"
-                  label="E-mail"
-                  placeholder="E-mail"
-                />
-                <Input
-                  name="question"
-                  value={question}
-                  callback={setQuestion}
-                  type="textarea"
-                  label="Alguma dúvida ou sugestão?"
-                  placeholder="Escreva aqui."
-                />
-                <Input
-                  name="contactFrom"
-                  value={contactFrom}
-                  callback={setContactForm}
-                  type="select"
-                  label="Preferência de contato"
-                  options={[
-                    {
-                      label: "Whatsapp",
-                      value: "whatsapp"
-                    },
-                    {
-                      label: "Telefone",
-                      value: "telefone"
-                    },
-                    {
-                      label: "E-mail",
-                      value: "E-mail"
-                    }
-                  ]}
-                />
-                <input type='submit' className="c-button" />
-              </form>
+              <Form />
             </section>
-
           </div>
         </div>
       </section>
@@ -195,6 +132,19 @@ const CarPage = () => {
           ))}</ul>
         </div>
       </article>
+
+      {filteredCars && filteredCars.length > 0 && (
+        <section className="l-car__related">
+          <h2 className="l-car__related-title">Veículos relacionados</h2>
+          <div className="l-car__related-content">
+            {filteredCars.slice(0, 6).map((relatedCar) => (
+              <Car key={relatedCar.Id} car={relatedCar} />
+            ))
+            }
+          </div>
+        </section>
+      )}
+
     </main>
   );
 }

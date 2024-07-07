@@ -13,7 +13,7 @@ const Footer = () => {
       <div className="l-footer">
         <div className="l-footer__content">
           {Lojas.map(loja => (
-            <div key={loja.cnpj} className="l-footer__loja">
+            <div key={loja.name} className="l-footer__loja">
               <h1 className="l-footer__loja-title">{loja.name}</h1>
               <a href={`tel:${loja.phone.replace(/[^\d]/g, '')}`} className="l-footer__loja-info">
                 <Icon icon="phone" className="l-footer__icon" size="20" />

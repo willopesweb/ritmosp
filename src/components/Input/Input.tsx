@@ -1,12 +1,48 @@
 import React from "react";
 import "./Input.scss";
 
+const MASKS = {
+  cpf: (value: string) => {
+    const cleaned = value.replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{0,3})(\d{0,3})(\d{0,3})(\d{0,2})$/);
+    if (match) {
+      return !match[2]
+        ? match[1]
+        : `${match[1]}.${match[2]}${match[3] ? `.${match[3]}` : ""}${match[4] ? `-${match[4]}` : ""
+        }`;
+    }
+    return value;
+  },
+  cnpj: (value: string) => {
+    const cleaned = value.replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})$/);
+    if (match) {
+      return !match[2]
+        ? match[1]
+        : `${match[1]}.${match[2]}${match[3] ? `.${match[3]}` : ""}${match[4] ? `/${match[4]}` : ""
+        }${match[5] ? `-${match[5]}` : ""}`;
+    }
+    return value;
+  },
+  phone: (value: string) => {
+    const cleaned = value.replace(/\D/g, "");
+    const match = cleaned.match(/^(\d{0,2})(\d{0,5})(\d{0,4})$/);
+    if (match) {
+      return !match[2]
+        ? match[1]
+        : `(${match[1]}) ${match[2]}${match[3] ? `-${match[3]}` : ""}`;
+    }
+    return value;
+  }
+};
+
 export interface InputInterface extends React.ComponentProps<"input"> {
   name: string;
   label: string;
   tooltip?: string;
   unit?: string;
   options?: OptionsInterface[];
+  mask?: keyof typeof MASKS; // Propriedade opcional para máscara
 }
 
 export interface OptionsInterface {
@@ -27,9 +63,25 @@ export const Input = ({
   tooltip,
   type,
   options,
+  mask, // Adicionando a propriedade mask às props
   placeholder,
   ...inputProps
 }: InputProps) => {
+  // Função para aplicar a máscara ao valor do input
+  const applyMask = (value: string): string => {
+    if (mask && typeof MASKS[mask] === "function") {
+      return MASKS[mask](value);
+    }
+    return value;
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    // Aplica a máscara ao valor antes de chamar o callback
+    const maskedValue = applyMask(e.target.value);
+    callback(maskedValue);
+  };
+
+  // Função para renderizar o input baseado no tipo
   const renderInput = () => {
     switch (type) {
       case "text":
@@ -41,7 +93,7 @@ export const Input = ({
             type={type}
             value={value}
             placeholder={placeholder}
-            onChange={(e) => callback(e.target.value)}
+            onChange={handleChange}
             {...inputProps}
           />
         );
@@ -59,7 +111,7 @@ export const Input = ({
           <select
             name={name}
             value={value}
-            onChange={(e) => callback(e.target.value)}
+            onChange={handleChange}
           >
             {options &&
               options.map((option) => {
@@ -77,7 +129,7 @@ export const Input = ({
             name={name}
             value={value}
             placeholder={placeholder}
-            onChange={(e) => callback(e.target.value)}
+            onChange={handleChange}
             rows={5}
             cols={33}
           />
@@ -87,7 +139,7 @@ export const Input = ({
           <input
             type="text"
             value={value}
-            onChange={(e) => callback(e.target.value)}
+            onChange={handleChange}
             {...inputProps}
           />
         );
@@ -106,7 +158,6 @@ export const Input = ({
           ""
         )}
       </span>
-
       {renderInput()}
     </label>
   );

@@ -1,0 +1,30 @@
+.l-selectAddress {
+  --address-font-color: var(--theme-color-1);
+  display: grid;
+  place-items: center;
+
+  li {
+    font-size: rem(20);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: rem(5);
+    cursor: pointer;
+    transition: var(--theme-transition2);
+    font-weight: bold;
+    color: var(--address-font-color);
+    width: 100%;
+    padding: rem(10);
+
+    svg path {
+      fill: var(--address-font-color);
+      transition: var(--theme-transition2);
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      --address-font-color: var(--theme-color-2);
+    }
+  }
+}

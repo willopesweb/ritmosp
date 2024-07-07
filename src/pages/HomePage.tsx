@@ -217,7 +217,6 @@ const Home = () => {
             ]} value={sortOption} callback={setSortOption} />
           </div>
 
-
           {
             sortedCars.length > 0 ? (
               <ul className="l-home__cars">

@@ -2,14 +2,81 @@
 
 $desktop: 1000;
 
+$header-fixed-height: rem(70);
+
 .l-header {
   background-color: #fff;
   box-shadow: var(--theme-box-shadow2);
   color: var(--text-color-1);
-  position: fixed;
-  top: 0;
   width: 100%;
-  z-index: z-index("fixed-header");
+
+  &--is-fixed {
+    position: fixed;
+    top: 0;
+    height: $header-fixed-height ;
+    z-index: z-index("fixed-header");
+  }
+
+  &__fixed-margin {
+    margin-bottom: $header-fixed-height;
+  }
+
+  &__top-header {
+    display: none;
+    background-color: var(--theme-color-1);
+    color: #fff;
+    border-bottom: 5px solid var(--theme-color-2);
+
+    @include breakpoint(1000) {
+      display: block;
+    }
+  }
+
+  &__top-header-content {
+    --social-icon-color: #fff;
+    @include content;
+    padding-top: rem(10);
+    padding-bottom: rem(10);
+    align-items: center;
+    justify-content: space-between;
+
+    &>div {
+      display: flex;
+      align-items: center;
+      gap: rem(10);
+    }
+
+    .info {
+      display: flex;
+      align-items: center;
+      gap: rem(5);
+
+      svg path {
+        fill: var(--social-icon-color);
+        transition: var(--theme-transition);
+      }
+    }
+
+    a.info {
+      transition: var(--theme-transition);
+
+      &:hover,
+      &:focus,
+      &:active {
+        color: var(--theme-color-2);
+        --social-icon-color: var(--theme-color-2);
+      }
+    }
+
+
+  }
+
+  &__social {
+
+    display: flex;
+    align-items: center
+  }
+
 
   &__content {
     @include content("grid");
@@ -81,16 +148,8 @@ $desktop: 1000;
       justify-content: center;
       width: auto;
     }
-
   }
 
-  &__social {
-    --social-icon-color: #fff;
-
-    @include breakpoint($desktop) {
-      --social-icon-color: var(--theme-color-1);
-    }
-  }
 
   &__buttons {
     display: flex;

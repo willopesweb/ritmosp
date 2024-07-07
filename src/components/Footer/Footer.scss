@@ -6,9 +6,9 @@
 
   &__content {
     @include content("grid");
-    padding-top: calc(var(--global-module-size) * 3);
+    padding-top: calc(var(--global-module-size) * 2);
     padding-bottom: calc(var(--global-module-size) * 3);
-    gap: calc(var(--global-module-size) * 2);
+    gap: var(--global-module-size);
 
     @include breakpoint(600) {
       grid-template-columns: 1fr 1fr;
@@ -18,9 +18,9 @@
       grid-template-columns: 1fr 1fr 1fr;
     }
 
-    /* @include breakpoint(800) {
+    @include breakpoint(1000) {
       grid-template-columns: 1fr 1fr 1fr 1fr;
-    } */
+    }
   }
 
   &__loja {
@@ -31,6 +31,29 @@
 
   &__loja-title {
     font-size: rem(21);
+    position: relative;
+    padding-top: var(--global-module-size);
+    padding-bottom: var(--global-module-size);
+
+    &::before {
+      position: absolute;
+      content: '';
+      width: 90px;
+      height: 2px;
+      background: rgba(255, 255, 255, .2);
+      bottom: 0;
+      left: 0;
+    }
+
+    &::after {
+      position: absolute;
+      content: '';
+      width: 30px;
+      height: 2px;
+      background-color: var(--theme-color-2);
+      bottom: 0;
+      left: 18px;
+    }
   }
 
   &__loja-info {
@@ -43,9 +66,9 @@
 
   &__icon {
     background-color: var(--theme-color-2);
-    min-height: rem(50);
-    min-width: rem(50);
-    padding: rem(10);
+    min-height: rem(30);
+    min-width: rem(30);
+    padding: rem(7);
     border-radius: 5px;
 
     path {
