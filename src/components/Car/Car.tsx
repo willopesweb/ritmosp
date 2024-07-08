@@ -16,12 +16,12 @@ interface CarProps {
 
 const Car = ({ car }: CarProps) => {
 
-  const link = formatParamURL(`${car.Modelo}${car.Versao}`);
+  const link = `/seminovos/carro/${formatParamURL(`${car.Modelo}${car.Versao}`)}`;
   const { whatsapp } = useCars();
 
   return (
     <article className="c-car">
-      <Link to={`carro/${link}`}>
+      <Link to={link}>
         <header className="c-car__header">
           <i className="c-car__brand">{car.Marca}</i>
           <span className="c-car__year">{car.AnoFabricacao}/{car.AnoModelo}</span>

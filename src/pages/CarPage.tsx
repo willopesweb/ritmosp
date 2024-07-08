@@ -20,7 +20,7 @@ const CarPage = () => {
 
   useEffect(() => {
     if (car) {
-      const relatedCars = cars.filter((relatedCar) => relatedCar.Marca === car.Marca);
+      const relatedCars = cars.filter((relatedCar) => relatedCar.Marca === car.Marca && relatedCar.Id !== car.Id);
       setFilteredCars(relatedCars);
     }
   }, [car, cars]);
