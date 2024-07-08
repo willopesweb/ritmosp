@@ -122,16 +122,19 @@ const CarPage = () => {
           </div>
         </div>
       </section>
-      <article className="l-car__optionals">
-        <div className="l-car__optionals-content">
-          <h2 className="l-car__optionals-title">
-            Opcionais
-          </h2>
-          <ul className="l-car__optionals-list">{car.Opcionais.split(", ").map(optional => (
-            <li key={optional}>{optional}</li>
-          ))}</ul>
-        </div>
-      </article>
+      {car.Opcionais && car.Opcionais.length > 0 && (
+        <article className="l-car__optionals">
+          <div className="l-car__optionals-content">
+            <h2 className="l-car__optionals-title">
+              Opcionais
+            </h2>
+            <ul className="l-car__optionals-list">{car.Opcionais.split(", ").map(optional => (
+              <li key={optional}>{optional}</li>
+            ))}</ul>
+          </div>
+        </article>
+      )}
+
 
       {filteredCars && filteredCars.length > 0 && (
         <section className="l-car__related">

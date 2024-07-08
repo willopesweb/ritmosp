@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useRef } from "react";
 import { ReactSVG } from "react-svg";
 import "./Modal.scss";
 import iconCloseModal from "./close-modal.svg";
+import Icon from "../Icon";
 
 interface ModalProps {
   title: string;
@@ -35,7 +36,7 @@ const Modal = ({
     <div className="c-modal is-open">
       <section ref={modalRef} className="c-modal__card">
         <header className="c-modal__header">
-          <h2 className="c-modal__title">{title}</h2>
+          <h2 className="c-modal__title"><Icon icon="location" size="30" />{title}</h2>
           {closeModal && (<button
             onClick={() => closeModal()}
             className="c-modal__close"

@@ -62,7 +62,7 @@ const Form = ({ vehicle }: { vehicle: string }) => {
         callback={setName}
         type="text"
         label="Nome"
-        required={false}
+        required={true}
         placeholder="Nome Completo"
       />
       <Input
@@ -73,7 +73,7 @@ const Form = ({ vehicle }: { vehicle: string }) => {
         label="CPF/CNPJ"
         mask="cpf"
         maxLength={14}
-        required={false}
+        required={true}
         placeholder="CPF/CNPJ"
       />
       <Input
@@ -83,7 +83,7 @@ const Form = ({ vehicle }: { vehicle: string }) => {
         type="text"
         mask="phone"
         maxLength={15}
-        required={false}
+        required={true}
         label="Telefone"
         placeholder="Telefone"
       />
@@ -93,7 +93,7 @@ const Form = ({ vehicle }: { vehicle: string }) => {
         callback={setUserEmail}
         type="email"
         label="E-mail"
-        required={false}
+        required={true}
         placeholder="E-mail"
       />
       <Input

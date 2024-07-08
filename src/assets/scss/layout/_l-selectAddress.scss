@@ -1,30 +1,78 @@
 .l-selectAddress {
-  --address-font-color: var(--theme-color-1);
-  display: grid;
-  place-items: center;
 
-  li {
-    font-size: rem(20);
+  &__button {
+    width: 100%;
+    max-width: rem(400);
+    margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: rem(5);
+    align-items: center;
+    border: 3px solid var(--theme-color-1);
+    border-radius: rem(5);
+    font-weight: bold;
+    font-size: rem(20);
+    padding: var(--global-module-size);
     cursor: pointer;
     transition: var(--theme-transition2);
-    font-weight: bold;
-    color: var(--address-font-color);
-    width: 100%;
-    padding: rem(10);
-
-    svg path {
-      fill: var(--address-font-color);
-      transition: var(--theme-transition2);
-    }
 
     &:hover,
     &:focus,
     &:active {
-      --address-font-color: var(--theme-color-2);
+      background-color: var(--theme-color-1);
+      color: #fff;
+    }
+
+    &::after {
+      content: "";
+      border-bottom: 0;
+      border-left: .3em solid transparent;
+      border-right: .3em solid transparent;
+      border-top: .3em solid;
+      content: "";
+      display: inline-block;
+      margin-left: .255em;
+      vertical-align: .255em;
+    }
+  }
+
+  &__list {
+    --address-font-color: var(--theme-color-1);
+    display: grid;
+    place-items: center;
+    max-height: 0px;
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--theme-transition2);
+
+    &.is-visible {
+      max-height: 1000px;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    li {
+      font-size: rem(20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: rem(5);
+      cursor: pointer;
+      transition: var(--theme-transition2);
+      font-weight: bold;
+      color: var(--address-font-color);
+      width: 100%;
+      padding: rem(10);
+
+      svg path {
+        fill: var(--address-font-color);
+        transition: var(--theme-transition2);
+      }
+
+      &:hover,
+      &:focus,
+      &:active {
+        --address-font-color: var(--theme-color-2);
+      }
     }
   }
 }
