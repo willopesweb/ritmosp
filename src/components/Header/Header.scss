@@ -1,13 +1,14 @@
 @import "../../assets/scss/abstracts";
 
 $desktop: 1000;
-
-$header-fixed-height: rem(70);
+$header-fixed-height: rem(90);
 
 .l-header {
   background-color: #fff;
   box-shadow: var(--theme-box-shadow2);
   color: var(--text-color-1);
+  display: flex;
+  flex-direction: column;
   width: 100%;
 
   &--is-fixed {
@@ -178,6 +179,44 @@ $header-fixed-height: rem(70);
     @include breakpoint($desktop) {
       display: none;
       visibility: hidden;
+    }
+  }
+
+  &__location {
+    background-color: #000;
+    color: #fff;
+    margin-top: -1px;
+  }
+
+  &__location-content {
+    @include content;
+    padding-top: rem(10);
+    padding-bottom: rem(10);
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: rem(18);
+
+    svg path {
+      fill: #fff;
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: rem(5);
+    }
+
+    span {
+      transition: var(--theme-transition);
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+      span {
+        color: var(--theme-color-2);
+      }
     }
   }
 }

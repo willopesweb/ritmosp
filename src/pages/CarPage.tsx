@@ -13,7 +13,7 @@ import Form from '../components/Form/Form';
 
 const CarPage = () => {
   const { id } = useParams<{ id: string }>();
-  const { cars, loading, error, whatsapp } = useCars();
+  const { cars, loading, error, loja } = useCars();
   const [filteredCars, setFilteredCars] = useState<CarInterface[]>([]);
   const [featuredPhoto, setFeaturedPhoto] = useState("");
   const car = cars ? cars.find((car: CarInterface) => formatParamURL(`${car.Modelo}${car.Versao}`) === id) : null;
@@ -111,7 +111,7 @@ const CarPage = () => {
               <span className="only">Por apenas</span>
               <b>{car.Preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</b>
 
-              <Button link={true} href={`https://api.whatsapp.com/send?phone=${formatPhoneNumber(whatsapp as string)}&text=Olá, tenho interesse no carro ${car.Modelo}${car.Versao}`} target="_blank" label="Fale com um consultor">
+              <Button link={true} href={`https://api.whatsapp.com/send?phone=${formatPhoneNumber(loja?.phone as string)}&text=Olá, tenho interesse no carro ${car.Modelo}${car.Versao}`} target="_blank" label="Fale com um consultor">
                 <Icon icon="whatsapp" size="40" />
               </Button>
             </div>

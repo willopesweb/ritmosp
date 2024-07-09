@@ -4,6 +4,7 @@ import Car from '../components/Car/Car';
 import Loading from '../components/Loading/Loading';
 import Notification from '../components/Notification/Notification';
 import { Input, InputInterface, OptionsInterface } from '../components/Input/Input';
+import Icon from '../components/Icon';
 
 
 interface Filter extends InputInterface {
@@ -13,6 +14,7 @@ interface Filter extends InputInterface {
 const Home = () => {
   const { cars, brands, loading, error } = useCars();
   const [modelsOptions, setModelsOptions] = useState<OptionsInterface[]>([]);
+  const [modalFilter, setModalFilters] = useState(false);
 
   const [condicao, setConficao] = useState('Usado');
   const [marca, setMarca] = useState('');
@@ -188,26 +190,35 @@ const Home = () => {
         <h2 className="l-home__title">Seminovos</h2>
       </div>
 
+      <div className="l-home__filters-mobile" onClick={() => setModalFilters(true)}>
+        <Icon icon="filter" size="20" />
+      </div>
+
       <div className="l-home__content">
-        <div className="l-home__filters">
-          <div className="l-home__filter-condition">
-            <span className={condicao !== "Usado" ? "is-active" : ""} onClick={() => setConficao("Novo")}>0km</span>
-            <span className={condicao === "Usado" ? "is-active" : ""} onClick={() => setConficao("Usado")}>Seminovos</span>
+        <div className={`l-home__filters ${modalFilter ? "is-visible" : ""}`}>
+          <div className="l-home__filters-content">
+            <span className="l-home__filters-close" onClick={() => { setModalFilters(false) }}>
+              <Icon icon="cancel-circle" size="25" />
+            </span>
+            <div className="l-home__filter-condition">
+              <span className={condicao !== "Usado" ? "is-active" : ""} onClick={() => setConficao("Novo")}>0km</span>
+              <span className={condicao === "Usado" ? "is-active" : ""} onClick={() => setConficao("Usado")}>Seminovos</span>
+            </div>
+            {
+              filters.map(filter => (
+                <Input
+                  key={filter.name}
+                  name={filter.name}
+                  label={filter.label}
+                  placeholder={filter.placeholder}
+                  type={filter.type}
+                  value={filter.value}
+                  options={filter.options}
+                  callback={filter.setValue}
+                />
+              ))
+            }
           </div>
-          {
-            filters.map(filter => (
-              <Input
-                key={filter.name}
-                name={filter.name}
-                label={filter.label}
-                placeholder={filter.placeholder}
-                type={filter.type}
-                value={filter.value}
-                options={filter.options}
-                callback={filter.setValue}
-              />
-            ))
-          }
         </div>
 
         <div className="l-home__results">

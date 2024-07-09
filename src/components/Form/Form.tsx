@@ -6,7 +6,7 @@ import { useCars } from '../../context/CarsContext';
 import axios from 'axios';
 
 const Form = ({ vehicle }: { vehicle: string }) => {
-  const { email } = useCars();
+  const { loja } = useCars();
   const [name, setName] = useState("");
   const [fiscalCode, setFiscalCode] = useState("");
   const [phone, setPhone] = useState("");
@@ -31,7 +31,7 @@ const Form = ({ vehicle }: { vehicle: string }) => {
     formData.append('userEmail', userEmail);
     formData.append('question', question);
     formData.append('contactFrom', contactFrom);
-    formData.append('email', email as string);
+    formData.append('email', loja?.email as string);
 
     try {
       const response = await axios.post('https://ritmosp.com.br/seminovos/processForm.php', formData, {

@@ -1,4 +1,7 @@
 .env
+repostas.json
+processForm.php
+requestAdset.php
 
 # Logs
 logs

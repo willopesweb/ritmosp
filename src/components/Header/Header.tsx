@@ -7,13 +7,19 @@ import Icon from '../Icon';
 import Social from '../Social/Social';
 import About from '../About/About';
 import { useCars } from '../../context/CarsContext';
+import { LojaInterface } from '../../types';
+import Modal from '../Modal/Modal';
+import { Lojas } from '../../lojas';
 
 const Header = () => {
-
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
   const [isAboutBoxActive, setIsAboutBoxActive] = useState(false);
   const [isBackToTopActive, setIsBackToTopActive] = useState(false);
   const [isHeaderFixed, setIsHeaderFixed] = useState(false);
+
+  const [showInitialModal, setShowInitialModal] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
+  const { loja, setLoja } = useCars();
 
   const handleBackToTop = () => {
     window.scrollTo({
@@ -39,7 +45,15 @@ const Header = () => {
     };
   }, []);
 
-  const { whatsapp } = useCars();
+  useEffect(() => {
+    if (!loja) setShowInitialModal(true)
+  }, []);
+
+  function handleInitialModalClick(loja: LojaInterface) {
+    setLoja(loja);
+    setShowInitialModal(false);
+    setShowOptions(false);
+  }
 
   return (
     <>
@@ -47,10 +61,10 @@ const Header = () => {
         <div className={`l-header__top-header ${isHeaderFixed ? "l-header__top-header--is-header-fixed" : ""}`}>
           <div className="l-header__top-header-content">
             <div>
-              <a className="info" href={`https://api.whatsapp.com/send?phone=${whatsapp}&text=Olá, vim através da página de seminovos`}
+              <a className="info" href={`https://api.whatsapp.com/send?phone=${loja?.phone}&text=Olá, vim através da página de seminovos`}
                 title="Fale conosco no Whatsapp" target="_blank" rel="nofollow">
                 <Icon icon="whatsapp" size="20" />
-                {whatsapp}
+                {loja?.phone}
               </a>
               <span className="info">
                 <Icon icon="clock" size="20" />
@@ -86,12 +100,38 @@ const Header = () => {
               </div>
             </div>
           </div>
+          <div className="l-header__location">
+            <div className="l-header__location-content" onClick={() => setShowInitialModal(true)}>
+              <p>
+                <Icon icon="location" size="20" />
+                {loja ? loja.name : "Selecione a loja"}
+              </p>
+              <span>Alterar</span>
+            </div>
+
+          </div>
         </div>
       </header>
       <About active={isAboutBoxActive} setActive={setIsAboutBoxActive} />
       <span className={`c-backtotop ${isBackToTopActive ? 'is-active' : ''}`} onClick={handleBackToTop}>
         <Icon icon="arrow-up" size="20" />
       </span>
+      {showInitialModal && (
+        <Modal title="Selecione a unidade mais próxima a você:">
+          <div className="l-selectAddress">
+            <span className="l-selectAddress__button" onClick={() => setShowOptions(!showOptions)}>
+              Selecionar
+            </span>
+            <ul className={`l-selectAddress__list ${showOptions ? "is-visible" : ""}`}>
+              {Lojas.map(loja => (
+                <li key={loja.name} onClick={() => { handleInitialModalClick(loja) }}>
+                  {loja.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Modal>
+      )}
     </>
   )
 }
