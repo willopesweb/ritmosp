@@ -9,7 +9,6 @@ import About from '../About/About';
 import { useCars } from '../../context/CarsContext';
 import { LojaInterface } from '../../types';
 import Modal from '../Modal/Modal';
-import { Lojas } from '../../lojas';
 
 const Header = () => {
   const [isMobileMenuActive, setIsMobileMenuActive] = useState(false);
@@ -19,7 +18,7 @@ const Header = () => {
 
   const [showInitialModal, setShowInitialModal] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
-  const { loja, setLoja } = useCars();
+  const { lojas, loja, setLoja } = useCars();
 
   const handleBackToTop = () => {
     window.scrollTo({
@@ -123,7 +122,7 @@ const Header = () => {
               Selecionar
             </span>
             <ul className={`l-selectAddress__list ${showOptions ? "is-visible" : ""}`}>
-              {Lojas.map(loja => (
+              {lojas.map(loja => (
                 <li key={loja.name} onClick={() => { handleInitialModalClick(loja) }}>
                   {loja.name}
                 </li>

@@ -84,6 +84,7 @@ $header-fixed-height: rem(90);
     padding-top: rem(10);
     padding-bottom: rem(10);
     grid-template-columns: 200px calc(100% - 200px);
+    width: 100%;
   }
 
   &__logo {

@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { fetchCars } from '../api/adsetApi';
 import { CarInterface, BrandInterface, LojaInterface } from '../types';
+import { fetchLojas } from '../api/wordpressApi';
 
 interface CarContextProps {
   cars: CarInterface[];
@@ -9,21 +10,23 @@ interface CarContextProps {
   error: string | null;
   loja: LojaInterface | null;
   setLoja: (loja: LojaInterface) => void;
+  lojas: LojaInterface[];
 }
 
 const CarContext = createContext<CarContextProps | undefined>(undefined);
 
 export const CarProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cars, setCars] = useState<CarInterface[]>([]);
-  const [loja, setLoja] = useState<LojaInterface | null>(null);
   const [brands, setBrands] = useState<BrandInterface[]>([]);
+  const [lojas, setLojas] = useState<LojaInterface[]>([]);
+  const [loja, setLoja] = useState<LojaInterface | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchAllCars = async () => {
+    const fetchData = async () => {
       try {
-        const carRequests = await fetchCarsJSON();
+        const [carRequests, lojasData] = await Promise.all([fetchCarsJSON(), fetchLojas()]);
 
         const successfulResponses = carRequests.filter(cars => cars.length > 0);
         if (successfulResponses.length > 0) {
@@ -34,14 +37,16 @@ export const CarProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         } else {
           setError('Nenhum carro encontrado.');
         }
+
+        setLojas(lojasData);
       } catch (error) {
-        setError('Erro ao buscar carros. Verifique sua conexão com a internet.');
+        setError('Erro ao buscar dados. Verifique sua conexão com a internet.');
       } finally {
         setLoading(false);
       }
     }
 
-    fetchAllCars();
+    fetchData();
   }, []);
 
   const fetchCarsJSON = async (): Promise<Array<CarInterface[]>> => {
@@ -70,20 +75,8 @@ export const CarProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     }));
   }
 
-  // Consulta realizada direta para API da Adset. Descontinuada, porque restrições da API
-  /*   const fetchCarsByCNPJ = async (cnpj: string): Promise<CarInterface[]> => {
-      try {
-        const request = createAdsetApiRequest(cnpj);
-        const fetchedCars = await fetchCars(cnpj);
-        return fetchedCars;
-      } catch (error) {
-        console.error(`Erro ao buscar carros para o CNPJ ${cnpj}:`, error);
-        return [];
-      }
-    } */
-
   return (
-    <CarContext.Provider value={{ cars, brands, loading, error, loja, setLoja }}>
+    <CarContext.Provider value={{ cars, brands, loading, error, loja, setLoja, lojas }}>
       {children}
     </CarContext.Provider>
   );
