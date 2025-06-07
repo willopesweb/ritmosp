@@ -7,7 +7,7 @@ const Page404 = () => {
     <main>
       <div className="l-page__content l-page__404" >
         <h1>Página não encontrada</h1>
-        <Link to="/seminovos">Volta para home</Link>
+        <Link to="/ofertas">Volta para home</Link>
       </div>
     </main>
   );

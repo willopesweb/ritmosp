@@ -16,7 +16,7 @@ const Home = () => {
   const [modelsOptions, setModelsOptions] = useState<OptionsInterface[]>([]);
   const [modalFilter, setModalFilters] = useState(false);
 
-  const [condicao, setConficao] = useState('Usado');
+  const [condicao, setCondicao] = useState("Usado");
   const [marca, setMarca] = useState('');
   const [modelo, setModelo] = useState('');
   const [anoModeloDe, setAnoModeloDe] = useState('');
@@ -38,6 +38,17 @@ const Home = () => {
     label: "Selecione a marca",
     value: ""
   };
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const valor = params.get("condicao");
+
+    if (valor === "novos") {
+      setCondicao("ZeroKm");
+    } else if (valor === "seminovos") {
+      setCondicao("Usado");
+    }
+  }, [location.search]);
 
   useEffect(() => {
     let filteredBrand = brands.filter((el) => el.brand === marca.toUpperCase());
@@ -187,7 +198,7 @@ const Home = () => {
   return (
     <main>
       <div className="l-home__header">
-        <h2 className="l-home__title">Seminovos</h2>
+        <h2 className="l-home__title">Veículos em Oferta</h2>
       </div>
 
       <div className="l-home__filters-mobile" onClick={() => setModalFilters(true)}>
@@ -201,8 +212,8 @@ const Home = () => {
               <Icon icon="cancel-circle" size="25" />
             </span>
             <div className="l-home__filter-condition">
-              <span className={condicao !== "Usado" ? "is-active" : ""} onClick={() => setConficao("Novo")}>0km</span>
-              <span className={condicao === "Usado" ? "is-active" : ""} onClick={() => setConficao("Usado")}>Seminovos</span>
+              <span className={condicao !== "Usado" ? "is-active" : ""} onClick={() => setCondicao("ZeroKm")}>0km</span>
+              <span className={condicao === "Usado" ? "is-active" : ""} onClick={() => setCondicao("Usado")}>Seminovos</span>
             </div>
             {
               filters.map(filter => (

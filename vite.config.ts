@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/ao mudar
 export default defineConfig({
-  base: 'https://www.ritmosp.com.br/seminovos',
+  base: 'https://www.ritmosp.com.br/ofertas',
   server: {
     proxy: {
       '/integrador/api/estoqueveiculos': {

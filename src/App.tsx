@@ -24,8 +24,8 @@ function App() {
       <ScrollToTop />
       <Header />
       <Routes>
-        <Route path="/seminovos" element={<HomePage />} />
-        <Route path="/seminovos/carro/:id" element={<CarPage />} />
+        <Route path="/ofertas" element={<HomePage />} />
+        <Route path="/ofertas/carro/:id" element={<CarPage />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
       <Footer />

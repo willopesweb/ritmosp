@@ -34,7 +34,7 @@ const Form = ({ vehicle }: { vehicle: string }) => {
     formData.append('email', loja?.email as string);
 
     try {
-      const response = await axios.post('https://ritmosp.com.br/seminovos/processForm.php', formData, {
+      const response = await axios.post('https://ritmosp.com.br/ofertas/processForm.php', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
