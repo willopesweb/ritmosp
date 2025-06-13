@@ -10,6 +10,11 @@
 body {
   color: var(--theme-color-1);
   font-family: var(--theme-font-family);
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 main {

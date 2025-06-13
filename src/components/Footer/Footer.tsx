@@ -10,7 +10,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
   const { lojas } = useCars();
   return (
-    <footer>
+    <footer id="contato">
       <div className="l-footer">
         <div className="l-footer__content">
           {lojas.map(loja => (

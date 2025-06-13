@@ -92,20 +92,21 @@ const Header = () => {
         <div className={`l-header ${isHeaderFixed ? "l-header--is-fixed" : ""}`}>
           <div className='l-header__content' >
             <div className="l-header__logo">
-              <Link to="/ofertas">
-                <img width="150" src={logo} alt="Ritmo SP" />
-              </Link>
+              <a href="https://www.ritmosp.com.br" title="Ritmo SP">
+                <img width="150" src={logo} alt="Ritmo SP" /></a>
             </div>
             <nav className={isMobileMenuActive ? 'l-header__menu is-active' : 'l-header__menu'} aria-label="Menu principal"
             >
               <a href="https://www.ritmosp.com.br/ofertas?condicao=novos" className="l-header__menu-item">Ofertas 0km</a>
+              <a href="https://www.ritmosp.com.br/ofertas?condicao=seminovos" className="l-header__menu-item">Ofertas Seminovos</a>
               <span className="l-header__menu-item" onClick={() => setIsAboutBoxActive(true)}>Quem Somos</span>
               <a href="https://www.ritmosp.com.br/#carros" className="l-header__menu-item">Carros</a>
               <a href="https://www.ritmosp.com.br/#suvs" className="l-header__menu-item">SUVS</a>
               <a href="https://www.ritmosp.com.br/#picapes" className="l-header__menu-item">Picapes</a>
               <a href="https://www.ritmosp.com.br/#esportivos" className="l-header__menu-item">Esportivos</a>
               <a href="https://www.ritmosp.com.br/#eletricos" className="l-header__menu-item">Elétricos</a>
-              <a href="https://www.ritmosp.com.br/ofertas?condicao=seminovos" className="l-header__menu-item">Seminovos</a>
+              <a href="#contato" className="l-header__menu-item">Contato</a>
+
             </nav>
             <div className={'l-header__buttons'}>
               <div onClick={() => setIsMobileMenuActive(!isMobileMenuActive)} >

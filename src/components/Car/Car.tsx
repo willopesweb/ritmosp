@@ -16,7 +16,7 @@ interface CarProps {
 
 const Car = ({ car }: CarProps) => {
 
-  const link = `/ofertas/carro/${formatParamURL(`${car.Modelo}${car.Versao}`)}`;
+  const link = `/ofertas/carro/${formatParamURL(`${car.Id}-${car.Modelo}${car.Versao}`)}`;
   const { loja } = useCars();
 
   return (

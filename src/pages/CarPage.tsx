@@ -16,7 +16,7 @@ const CarPage = () => {
   const { cars, loading, error, loja } = useCars();
   const [filteredCars, setFilteredCars] = useState<CarInterface[]>([]);
   const [featuredPhoto, setFeaturedPhoto] = useState("");
-  const car = cars ? cars.find((car: CarInterface) => formatParamURL(`${car.Modelo}${car.Versao}`) === id) : null;
+  const car = cars ? cars.find((car: CarInterface) => formatParamURL(`${car.Id}-${car.Modelo}${car.Versao}`) === id) : null;
 
   useEffect(() => {
     if (car) {
